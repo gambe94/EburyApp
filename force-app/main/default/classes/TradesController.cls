@@ -16,4 +16,10 @@ public with sharing class TradesController {
       LIMIT 10
     ];
   }
+
+  public static void getRate(
+    String baseCurrency,
+    List<String> targetCurrencies
+  ) {
+  }
 }
