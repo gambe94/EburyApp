@@ -1,0 +1,14 @@
+{
+  "orgName": "Ebury Tradeing",
+  "edition": "Developer",
+  "features": ["EnableSetPasswordInApi"],
+  "adminEmail": "demetergabor94@gmail.com",
+  "settings": {
+    "lightningExperienceSettings": {
+      "enableS1DesktopEnabled": true
+    },
+    "mobileSettings": {
+      "enableS1EncryptedStoragePref2": false
+    }
+  }
+}
