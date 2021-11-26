@@ -9,62 +9,60 @@
       Create Trade
     </h3>
 
-    <div
-      class="slds-grid slds-grid_align-space slds-grid_align-center slds-var-m-around_large"
+    <lightning-record-edit-form
+      object-api-name={tradeObject}
+      onsuccess={handleCaseCreated}
     >
-      <div class="slds-col">
-        <div class="slds-wrap">
-          <div class="slds-col slds-size_1-of-1">
-            <lightning-input
-              type="text"
-              label="Sell Currency"
-              value={currecies}
-              required
-            ></lightning-input>
-          </div>
-          <div class="slds-col slds-size_1-of-1">
-            <lightning-input
-              type="number"
-              label="Sell Amount"
-              required
-            ></lightning-input>
-          </div>
-          <div class="slds-col slds-size_1-of-1">
-            <lightning-button label="Cancel"></lightning-button>
+      <div
+        class="slds-grid slds-grid_align-space slds-grid_align-center slds-var-m-around_large"
+      >
+        <div class="slds-col">
+          <div class="slds-wrap">
+            <div class="slds-col slds-size_1-of-1">
+              <lightning-input-field
+                field-name={sellCcy}
+                onchange={handleInputChange}
+              ></lightning-input-field>
+            </div>
+            <div class="slds-col slds-size_1-of-1">
+              <lightning-input-field
+                field-name={sellAmount}
+                onchange={handleInputChange}
+              ></lightning-input-field>
+            </div>
+            <div class="slds-col slds-size_1-of-1">
+              <lightning-button label="Cancel"></lightning-button>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="slds-col">
-        <div class="slds-col slds-size_1-of-1">
-          <lightning-input
-            type="number"
-            label="Rate"
-            disabled
-          ></lightning-input>
-        </div>
-      </div>
-      <div class="slds-col">
-        <div class="slds-wrap">
+        <div class="slds-col">
           <div class="slds-col slds-size_1-of-1">
-            <lightning-input
-              type="text"
-              label="Buy Currency"
-              placeholder="EUR"
-              required
-            ></lightning-input>
-          </div>
-          <div class="slds-col slds-size_1-of-1">
-            <lightning-input
-              type="number"
-              label="Buy Amount"
+            <lightning-input-field
+              field-name={rate}
               disabled
-            ></lightning-input>
+            ></lightning-input-field>
           </div>
-          <div class="slds-col slds-size_1-of-1">
-            <lightning-button label="Create"></lightning-button>
+        </div>
+        <div class="slds-col">
+          <div class="slds-wrap">
+            <div class="slds-col slds-size_1-of-1">
+              <lightning-input-field
+                field-name={buyCcy}
+                onchange={handleInputChange}
+              ></lightning-input-field>
+            </div>
+            <div class="slds-col slds-size_1-of-1">
+              <lightning-input-field
+                field-name={buyAmount}
+                disabled
+              ></lightning-input-field>
+            </div>
+            <div class="slds-col slds-size_1-of-1">
+              <lightning-button label="Create"></lightning-button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </lightning-record-edit-form>
   </lightning-card>
 </template>
