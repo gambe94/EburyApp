@@ -1,15 +1,51 @@
 <template>
-    <lightning-card>
-        <h3 slot="title">
-            <lightning-icon icon-name="custom:custom40" size="small" class="slds-m-right_small"></lightning-icon>
-            Trades
-        </h3>
-        <div slot="footer">
-                <lightning-badge label="Tag1"></lightning-badge>
-                <lightning-badge label="Tag2"></lightning-badge>
-                <lightning-badge label="Tag3"></lightning-badge>
-                <lightning-button label="Create"></lightning-button>
-        </div>
-        <p class="slds-p-horizontal_medium">Listing All The current records</p>
-    </lightning-card>
+  <lightning-card>
+    <h3 slot="title">
+      <lightning-icon
+        icon-name="custom:custom40"
+        size="small"
+        class="slds-m-right_small"
+      ></lightning-icon>
+      Trades
+    </h3>
+    <div slot="footer">
+      <lightning-badge label="Tag1"></lightning-badge>
+      <lightning-badge label="Tag2"></lightning-badge>
+      <lightning-badge label="Tag3"></lightning-badge>
+      <lightning-button label="Create"></lightning-button>
+    </div>
+    <div class="slds-p-horizontal_medium body">
+      <lightning-datatable
+        key-field="id"
+        data={data}
+        show-row-number-column
+        hide-checkbox-column
+        columns={columns}
+      >
+      </lightning-datatable>
+    </div>
+  </lightning-card>
+
+  <lightning-card class="slds-var-m-top_large">
+    <h3 slot="title">
+      <lightning-icon
+        icon-name="custom:custom40"
+        size="small"
+        class="slds-m-right_small"
+      ></lightning-icon>
+      Create Trade
+    </h3>
+
+    <div class="slds-grid slds-grid_align-center">
+      <div class="slds-col slds-size_5-of-12" style="background-color: coral">
+        <span>1</span>
+      </div>
+      <div class="slds-col slds-grow-none" style="background-color: blue">
+        <span>2</span>
+      </div>
+      <div class="slds-col slds-size_5-of-12" style="background-color: red">
+        <span>3</span>
+      </div>
+    </div>
+  </lightning-card>
 </template>
