@@ -50,6 +50,7 @@
                 label="Cancel"
                 class="slds-m-top_small"
                 onclick={handleReset}
+                variant="neutral"
               >
               </lightning-button>
             </lightning-layout-item>
@@ -121,6 +122,8 @@
                 label="Create"
                 type="submit"
                 onclick={createTrade}
+                variant="brand"
+                disabled={isCreateTradeDisabled}
               >
               </lightning-button>
             </lightning-layout-item>

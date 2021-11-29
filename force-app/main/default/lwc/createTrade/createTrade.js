@@ -1,5 +1,5 @@
 import { LightningElement, wire, track } from "lwc";
-import { getPicklistValues, getObjectInfo } from "lightning/uiObjectInfoApi";
+import { getObjectInfo } from "lightning/uiObjectInfoApi";
 
 import doRateCallout from "@salesforce/apex/RateCalloutService.doCallout";
 
@@ -30,27 +30,15 @@ export default class CreateTrade extends LightningElement {
     return Object.keys(rtis).find((rti) => rtis[rti].name === "Master");
   }
 
-  @wire(getPicklistValues, {
-    recordTypeId: "$objectInfo.data.defaultRecordTypeId",
-    fieldApiName: SELL_CCY
-  })
-  wirePicklist({ error, data }) {
-    if (error) {
-      console.error(error);
-    } else if (data) {
-      console.log(data);
-      this.currencyList = data.values;
-    }
-  }
   get calculatedBuyAmount() {
     return this.rateVal * this.sellAmountVal;
+  }
+  get isCreateTradeDisabled() {
+    return !this.rateVal;
   }
 
   initCallout = {};
 
-  handleCaseCreated() {
-    // Fire event for Toast to appear that Order was created
-  }
   handleInputChange(event) {
     console.log(event.target.fieldName);
     console.log(event.target);
@@ -94,5 +82,7 @@ export default class CreateTrade extends LightningElement {
         field.reset();
       });
     }
+    this.rateVal = undefined;
+    this.sellAmountVal = undefined;
   }
 }
