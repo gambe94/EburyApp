@@ -1,19 +1,49 @@
 public with sharing class RateCalloutService {
-  public static String doCallout(String baseCurrency) {
-    Map<String, String> headers = new Map<String, String>();
+  @AuraEnabled
+  public static String doCallout(
+    Boolean isMock,
+    String baseCurrency,
+    String targetCurrency
+  ) {
+    if (isMock) {
+      return '{ ' +
+        ' "success": true,' +
+        ' "timestamp": 1519296206,' +
+        ' "base": "EUR",' +
+        ' "date": "2021-11-26",' +
+        ' "rates": {' +
+        '     "AUD": 1.566015,' +
+        '     "HUF": 365,' +
+        '     "CAD": 1.560132,' +
+        '     "CHF": 1.154727,' +
+        '     "CNY": 7.827874,' +
+        '     "GBP": 0.882047,' +
+        '     "JPY": 132.360679,' +
+        '     "USD": 1.23396,' +
+        '}' +
+        '}';
+    }
 
-    CalloutUtils callout = new CalloutUtils();
+    String fullURLTemplate = '/latest?access_key={0}&base={1}&symbols={2}';
 
-    callout
-      .endPoint('http://data.fixer.io/api/latest')
-      .method('GET')
-      .addHeader('Content-Type', 'application/json')
-      .addParameter('accessKey', 'b2dd3bc469487ef1af9ad2aaea908c3b')
-      .addParameter('base', baseCurrency)
-      .addParameter('symbol', 'HUF,EUR')
-      .timeout(10000);
+    String fullPath = String.format(
+      fullURLTemplate,
+      new List<String>{
+        Integration_Configs__c.getInstance().Fixer_Api_Key__c,
+        baseCurrency,
+        targetCurrency
+      }
+    );
+    HttpRequest req = new HttpRequest();
+    req.setEndpoint('callout:Fixer_Api' + fullPath);
+    req.setMethod('GET');
 
-    HttpResponse res = callout.send();
+    System.debug(req.getEndpoint());
+
+    Http http = new Http();
+    HTTPResponse res = http.send(req);
+    System.debug(res.getBody());
+
     return res.getBody();
   }
 }

@@ -9,60 +9,95 @@
       Create Trade
     </h3>
 
-    <lightning-record-edit-form
-      object-api-name={tradeObject}
-      onsuccess={handleCaseCreated}
-    >
-      <div
-        class="slds-grid slds-grid_align-space slds-grid_align-center slds-var-m-around_large"
-      >
-        <div class="slds-col">
-          <div class="slds-wrap">
-            <div class="slds-col slds-size_1-of-1">
-              <lightning-input-field
-                field-name={sellCcy}
-                onchange={handleInputChange}
-              ></lightning-input-field>
-            </div>
-            <div class="slds-col slds-size_1-of-1">
-              <lightning-input-field
-                field-name={sellAmount}
-                onchange={handleInputChange}
-              ></lightning-input-field>
-            </div>
-            <div class="slds-col slds-size_1-of-1">
-              <lightning-button label="Cancel"></lightning-button>
-            </div>
-          </div>
-        </div>
-        <div class="slds-col">
-          <div class="slds-col slds-size_1-of-1">
-            <lightning-input-field
-              field-name={rate}
+    <lightning-layout horizontal-align="space" vertical-align="center">
+      <lightning-layout-item size="4" flexibility="auto" padding="around-small">
+        <lightning-layout multiple-rows="true">
+          <lightning-layout-item
+            size="12"
+            padding="around-small"
+            flexibility="auto"
+          >
+            <lightning-combobox
+              name="sellCCY"
+              label="Sell Currency"
+              placeholder="Select Progress"
+              options={currencyList}
+              onchange={handleInputChange}
+            ></lightning-combobox>
+          </lightning-layout-item>
+          <lightning-layout-item
+            size="12"
+            padding="around-small"
+            flexibility="auto"
+          >
+            <lightning-input type="number" label="Sell Amount">
+            </lightning-input>
+          </lightning-layout-item>
+          <lightning-layout-item
+            size="12"
+            padding="around-small"
+            flexibility="auto"
+          >
+            <lightning-button label="Cancel"> </lightning-button>
+          </lightning-layout-item>
+        </lightning-layout>
+      </lightning-layout-item>
+
+      <lightning-layout-item size="4" flexibility="auto" padding="around-small">
+        <lightning-layout multiple-rows="true">
+          <lightning-layout-item
+            size="12"
+            padding="around-small"
+            flexibility="auto"
+          >
+            <lightning-input
+              type="number"
+              label="Rate"
               disabled
-            ></lightning-input-field>
-          </div>
-        </div>
-        <div class="slds-col">
-          <div class="slds-wrap">
-            <div class="slds-col slds-size_1-of-1">
-              <lightning-input-field
-                field-name={buyCcy}
-                onchange={handleInputChange}
-              ></lightning-input-field>
-            </div>
-            <div class="slds-col slds-size_1-of-1">
-              <lightning-input-field
-                field-name={buyAmount}
-                disabled
-              ></lightning-input-field>
-            </div>
-            <div class="slds-col slds-size_1-of-1">
-              <lightning-button label="Create"></lightning-button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </lightning-record-edit-form>
+            ></lightning-input>
+          </lightning-layout-item>
+          <lightning-layout-item
+            size="12"
+            flexibility="auto"
+          ></lightning-layout-item>
+          <lightning-layout-item
+            size="12"
+            flexibility="auto"
+          ></lightning-layout-item>
+        </lightning-layout>
+      </lightning-layout-item>
+
+      <lightning-layout-item size="4" flexibility="auto" padding="around-small">
+        <lightning-layout multiple-rows="true">
+          <lightning-layout-item
+            size="12"
+            padding="around-small"
+            flexibility="auto"
+          >
+            <lightning-combobox
+              name="buyccy"
+              label="Buy Currency"
+              options={currencyList}
+              onchange={handleInputChange}
+            ></lightning-combobox>
+          </lightning-layout-item>
+          <lightning-layout-item
+            size="12"
+            padding="around-small"
+            flexibility="auto"
+          >
+            <lightning-input type="number" label="Buy Amount" disabled>
+            </lightning-input>
+          </lightning-layout-item>
+          <lightning-layout-item
+            size="12"
+            padding="around-small"
+            flexibility="auto"
+          >
+            <lightning-button label="Create"> </lightning-button>
+          </lightning-layout-item>
+        </lightning-layout>
+      </lightning-layout-item>
+    </lightning-layout>
   </lightning-card>
 </template>
