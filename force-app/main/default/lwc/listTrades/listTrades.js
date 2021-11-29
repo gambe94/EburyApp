@@ -3,7 +3,7 @@ import { LightningElement, wire } from "lwc";
 import getAllTrade from "@salesforce/apex/TradesController.getAllTrade";
 
 const columns = [
-  { label: "id", fieldName: "Name" },
+  { label: "Id", fieldName: "Name" },
   { label: "Sell CCY", fieldName: "Sell_Currency__c" },
   { label: "Sell Amount", fieldName: "Sell_Amount__c", type: "number" },
   { label: "Buy CCY", fieldName: "Buy_Currency__c" },

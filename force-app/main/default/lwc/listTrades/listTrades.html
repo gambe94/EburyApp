@@ -1,29 +1,11 @@
 <!-- sldsValidatorIgnore -->
 <template>
-  <lightning-card>
-    <h3 slot="title">
-      <lightning-icon
-        icon-name="custom:custom40"
-        size="small"
-        class="slds-m-right_small"
-      ></lightning-icon>
-      Trades
-    </h3>
-    <div slot="footer">
-      <lightning-badge label="Tag1"></lightning-badge>
-      <lightning-badge label="Tag2"></lightning-badge>
-      <lightning-badge label="Tag3"></lightning-badge>
-      <lightning-button label="Create"></lightning-button>
-    </div>
-    <div class="slds-p-horizontal_medium body">
-      <lightning-datatable
-        key-field="id"
-        data={data}
-        show-row-number-column
-        hide-checkbox-column
-        columns={columns}
-      >
-      </lightning-datatable>
-    </div>
-  </lightning-card>
+  <lightning-datatable
+    key-field="id"
+    data={data}
+    show-row-number-column
+    hide-checkbox-column
+    columns={columns}
+  >
+  </lightning-datatable>
 </template>
