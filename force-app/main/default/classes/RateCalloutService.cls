@@ -19,7 +19,7 @@ public with sharing class RateCalloutService {
         '     "CNY": 7.827874,' +
         '     "GBP": 0.882047,' +
         '     "JPY": 132.360679,' +
-        '     "USD": 1.23396,' +
+        '     "USD": 1.23396' +
         '}' +
         '}';
     }

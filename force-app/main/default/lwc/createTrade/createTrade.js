@@ -22,13 +22,7 @@ export default class CreateTrade extends LightningElement {
   @track currencyList;
 
   @wire(getObjectInfo, { objectApiName: TRADE_OBJECT })
-  wiredRecord({ error, data }) {
-    if (error) {
-      console.error(error);
-    } else if (data) {
-      console.log(data.recordTypeInfos);
-    }
-  }
+  objectInfo;
 
   get defaultRecordTypeId() {
     // Returns a map of record type Ids
@@ -37,7 +31,7 @@ export default class CreateTrade extends LightningElement {
   }
 
   @wire(getPicklistValues, {
-    recordTypeId: "012000000000000AAA",
+    recordTypeId: "$objectInfo.data.defaultRecordTypeId",
     fieldApiName: SELL_CCY
   })
   wirePicklist({ error, data }) {
@@ -65,10 +59,10 @@ export default class CreateTrade extends LightningElement {
       this.sellAmountVal = event.target.value;
     }
     console.log(this.initCallout);
-    this.doCallout();
+    this.fetchRate();
   }
 
-  doCallout() {
+  fetchRate() {
     if (
       this.initCallout.Sell_Currency__c &&
       this.initCallout.Sell_Amount__c &&
@@ -89,8 +83,16 @@ export default class CreateTrade extends LightningElement {
     }
   }
 
-  handleClick(event) {
-    console.log(event.target.value);
-    console.log(this.sellAmountVal);
+  handleTradeCreated(event) {
+    console.log("handleTradeCreated", event.detail.id);
+  }
+
+  handleReset() {
+    const inputFields = this.template.querySelectorAll("lightning-input-field");
+    if (inputFields) {
+      inputFields.forEach((field) => {
+        field.reset();
+      });
+    }
   }
 }
