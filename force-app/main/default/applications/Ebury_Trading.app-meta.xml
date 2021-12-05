@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
     <brand>
         <headerColor>#0070D2</headerColor>
@@ -19,6 +19,5 @@
     <tabs>standard-Event</tabs>
     <tabs>standard-report</tabs>
     <tabs>Trade__c</tabs>
-    <uiType>Lightning</uiType>
-    <utilityBar>Ebury_Trading_UtilityBar</utilityBar>
+    <uiType>Lightning</uiType>   
 </CustomApplication>

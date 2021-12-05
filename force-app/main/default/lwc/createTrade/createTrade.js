@@ -1,5 +1,4 @@
-import { LightningElement, wire, track } from "lwc";
-import { getObjectInfo } from "lightning/uiObjectInfoApi";
+import { LightningElement } from "lwc";
 
 import doRateCallout from "@salesforce/apex/RateCalloutService.doCallout";
 
@@ -10,6 +9,9 @@ import BUY__CCY from "@salesforce/schema/Trade__c.Buy_Currency__c";
 import BUY_AMOUNT from "@salesforce/schema/Trade__c.Buy_Amount__c";
 import RATE from "@salesforce/schema/Trade__c.Rate__c";
 
+// The delay used when debouncing event handlers before doing callout
+const DELAY = 700;
+
 export default class CreateTrade extends LightningElement {
   tradeObject = TRADE_OBJECT;
   sellCcy = SELL_CCY;
@@ -19,16 +21,6 @@ export default class CreateTrade extends LightningElement {
   rate = RATE;
   rateVal;
   sellAmountVal;
-  @track currencyList;
-
-  @wire(getObjectInfo, { objectApiName: TRADE_OBJECT })
-  objectInfo;
-
-  get defaultRecordTypeId() {
-    // Returns a map of record type Ids
-    const rtis = this.objectInfo.data.recordTypeInfos;
-    return Object.keys(rtis).find((rti) => rtis[rti].name === "Master");
-  }
 
   get calculatedBuyAmount() {
     return this.rateVal * this.sellAmountVal;
@@ -42,12 +34,20 @@ export default class CreateTrade extends LightningElement {
   handleInputChange(event) {
     console.log(event.target.fieldName);
     console.log(event.target);
-    this.initCallout[event.target.fieldName] = event.target.value;
-    if (event.target.fieldName === "Sell_Amount__c") {
-      this.sellAmountVal = event.target.value;
-    }
-    console.log(this.initCallout);
-    this.fetchRate();
+
+    // Debouncing this method: Do not actually fire the event as long as this function is
+    // being called within a delay of DELAY. This is to avoid a very large number of Apex
+    // method calls in components listening to this event.
+    window.clearTimeout(this.delayTimeout);
+    // eslint-disable-next-line @lwc/lwc/no-async-operation
+    this.delayTimeout = setTimeout(() => {
+      this.initCallout[event.target.fieldName] = event.target.value;
+      if (event.target.fieldName === "Sell_Amount__c") {
+        this.sellAmountVal = event.target.value;
+      }
+
+      this.fetchRate();
+    }, DELAY);
   }
 
   fetchRate() {
@@ -84,5 +84,6 @@ export default class CreateTrade extends LightningElement {
     }
     this.rateVal = undefined;
     this.sellAmountVal = undefined;
+    this.initCallout = undefined;
   }
 }

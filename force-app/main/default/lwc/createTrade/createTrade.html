@@ -1,13 +1,5 @@
 <template>
   <lightning-card class="slds-var-m-top_large">
-    <h3 slot="title">
-      <lightning-icon
-        icon-name="custom:custom40"
-        size="small"
-        class="slds-m-right_small"
-      ></lightning-icon>
-      Create Trade
-    </h3>
     <lightning-record-edit-form
       object-api-name={tradeObject}
       onsuccess={handleTradeCreated}
