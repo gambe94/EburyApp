@@ -1,37 +1,21 @@
 public with sharing class RateCalloutService {
-  @AuraEnabled
-  public static String doCallout(
-    Boolean isMock,
-    String baseCurrency,
-    String targetCurrency
-  ) {
-    if (isMock) {
-      return '{ ' +
-        ' "success": true,' +
-        ' "timestamp": 1519296206,' +
-        ' "base": "EUR",' +
-        ' "date": "2021-11-26",' +
-        ' "rates": {' +
-        '     "AUD": 1.566015,' +
-        '     "HUF": 365,' +
-        '     "CAD": 1.560132,' +
-        '     "CHF": 1.154727,' +
-        '     "CNY": 7.827874,' +
-        '     "GBP": 0.882047,' +
-        '     "JPY": 132.360679,' +
-        '     "USD": 1.23396' +
-        '}' +
-        '}';
-    }
+  private String baseCurrency;
+  private String targetCurrency;
 
+  public RateCalloutService(String baseCurrency, String targetCurrency) {
+    this.baseCurrency = baseCurrency;
+    this.targetCurrency = targetCurrency;
+  }
+
+  public RateCalloutWrapper.Rate doCallout() {
     String fullURLTemplate = '/latest?access_key={0}&base={1}&symbols={2}';
 
     String fullPath = String.format(
       fullURLTemplate,
       new List<String>{
         Integration_Configs__c.getInstance().Fixer_Api_Key__c,
-        baseCurrency,
-        targetCurrency
+        this.baseCurrency,
+        this.targetCurrency
       }
     );
     HttpRequest req = new HttpRequest();
@@ -41,9 +25,41 @@ public with sharing class RateCalloutService {
     System.debug(req.getEndpoint());
 
     Http http = new Http();
-    HTTPResponse res = http.send(req);
-    System.debug(res.getBody());
+    //HttpResponse response = http.send(req);
+    // return parse(response.getBody());
+    return parse(RateCalloutMockFactory.getMock(200).respond(null).getBody());
+  }
 
-    return res.getBody();
+  public RateCalloutWrapper.Rate parse(String responseBody) {
+    try {
+      RateCalloutWrapper myresponse = (RateCalloutWrapper) JSON.deserialize(
+        responseBody,
+        RateCalloutWrapper.class
+      );
+
+      return handleResponse(myresponse);
+    } catch (JSONException e) {
+      System.debug(LoggingLevel.ERROR, e.getMessage());
+      throw e;
+    }
+  }
+
+  public RateCalloutWrapper.Rate handleResponse(
+    RateCalloutWrapper rateWrapper
+  ) {
+    try {
+      if (rateWrapper.success) {
+        System.debug('GOOD');
+        System.debug(rateWrapper.rates);
+        return rateWrapper.rates;
+      } else {
+        throw new RateCalloutWrapper.RateCalloutWrapperException(
+          rateWrapper.error
+        );
+      }
+    } catch (NullPointerException e) {
+      System.debug(LoggingLevel.ERROR, e.getMessage());
+      throw e;
+    }
   }
 }

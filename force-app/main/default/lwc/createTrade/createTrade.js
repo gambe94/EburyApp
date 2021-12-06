@@ -1,6 +1,6 @@
 import { LightningElement } from "lwc";
 
-import doRateCallout from "@salesforce/apex/RateCalloutService.doCallout";
+import doRateCallout from "@salesforce/apex/TradesController.getRate";
 
 import TRADE_OBJECT from "@salesforce/schema/Trade__c";
 import SELL_CCY from "@salesforce/schema/Trade__c.Sell_Currency__c";
@@ -8,6 +8,8 @@ import SELL_AMOUNT from "@salesforce/schema/Trade__c.Sell_Amount__c";
 import BUY__CCY from "@salesforce/schema/Trade__c.Buy_Currency__c";
 import BUY_AMOUNT from "@salesforce/schema/Trade__c.Buy_Amount__c";
 import RATE from "@salesforce/schema/Trade__c.Rate__c";
+
+import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 // The delay used when debouncing event handlers before doing callout
 const DELAY = 700;
@@ -57,26 +59,51 @@ export default class CreateTrade extends LightningElement {
     ) {
       console.log("FIRE CALLOUT");
       doRateCallout({
-        isMock: true,
         baseCurrency: this.initCallout.Sell_Currency__c,
         targetCurrency: this.initCallout.Buy_Currency__c
       })
-        .then((response) => {
-          let data = JSON.parse(response);
-          console.log(data);
+        .then((rates) => {
+          console.log(rates);
           console.log(this.sellAmountVal);
-          this.rateVal = data.rates[this.initCallout.Buy_Currency__c]; //data?.rates?.this.initCallout.Buy_Currency__c;
+          this.rateVal = rates[this.initCallout.Buy_Currency__c]; //data?.rates?.this.initCallout.Buy_Currency__c;
         })
-        .catch((error) => console.error(error));
+        .catch((e) => {
+          console.error(e);
+          console.error("e.body.message => " + e.body.message);
+
+          const event = new ShowToastEvent({
+            title: "Integration error",
+            message: e.body.message,
+            variant: "error",
+            mode: "sticky"
+          });
+          this.dispatchEvent(event);
+        });
     }
   }
 
-  handleTradeCreated() {
-    console.log("Trade Cerated");
-    // eslint-disable-next-line @lwc/lwc/no-async-operation
-    setTimeout(() => {
-      this.dispatchEvent(new CustomEvent("tradecreated"));
-    }, 1000);
+  handleTradeCreated(event) {
+    let tradeId = event.detail.id;
+    this.generateSuccessToast(tradeId);
+
+    this.dispatchEvent(new CustomEvent("tradecreated"));
+  }
+
+  generateSuccessToast(tradeId) {
+    console.log(tradeId);
+    const event = new ShowToastEvent({
+      title: "Success!",
+      variant: "success",
+      message: "Trade record created! See it {0}!",
+      messageData: [
+        {
+          url: "/" + tradeId,
+          label: "here"
+        }
+      ]
+    });
+
+    this.dispatchEvent(event);
   }
 
   handleReset() {

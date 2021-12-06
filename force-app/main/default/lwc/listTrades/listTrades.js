@@ -1,4 +1,4 @@
-import { api, LightningElement, wire, track } from "lwc";
+import { api, LightningElement, track } from "lwc";
 
 import getAllTrade from "@salesforce/apex/TradesController.getAllTrade";
 
@@ -18,16 +18,10 @@ export default class ListTrades extends LightningElement {
   error;
   columns = columns;
 
-  @wire(getAllTrade)
-  wiredContacts({ error, data }) {
-    if (data) {
-      this.data = data;
-      this.error = undefined;
-    } else if (error) {
-      this.error = error;
-      this.data = undefined;
-    }
+  connectedCallback() {
+    this.fetchRecords();
   }
+
   @api
   fetchRecords() {
     console.log("Gabor fecthing the records");
@@ -38,6 +32,7 @@ export default class ListTrades extends LightningElement {
       })
       .catch((error) => {
         this.error = error;
+        console.error(error);
       });
   }
 }

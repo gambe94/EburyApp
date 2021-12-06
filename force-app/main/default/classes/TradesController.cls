@@ -16,9 +16,16 @@ public with sharing class TradesController {
     ];
   }
 
-  public static void getRate(
+  @AuraEnabled
+  public static RateCalloutWrapper.Rate getRate(
     String baseCurrency,
-    List<String> targetCurrencies
+    String targetCurrency
   ) {
+    RateCalloutService calloutService = new RateCalloutService(
+      baseCurrency,
+      targetCurrency
+    );
+    RateCalloutWrapper.Rate fetchedRate = calloutService.doCallout();
+    return fetchedRate;
   }
 }
