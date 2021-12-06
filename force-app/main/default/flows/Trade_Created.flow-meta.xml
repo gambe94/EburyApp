@@ -11,7 +11,7 @@
             <name>textJson</name>
             <value>
                 <stringValue
-        >{&quot;mentions&quot;:[],&quot;message&quot;:&quot;A new trade has been created with the following data:\nSell Currency: {![Trade__c].Sell_Currency__c}\nSell Amount: {![Trade__c].Sell_Amount__c}\nBuy Currency: {![Trade__c].Buy_Currency__c}\nBuy Amount:{![Trade__c].Buy_Amount__c}\nRate: {![Trade__c].Rate__c}\nBooked Date: {![Trade__c].CreatedDate}\nLinked to trade: https://force-customer-6015-dev-ed.lightning.force.com/{![Trade__c].Id}&quot;}</stringValue>
+        >{&quot;mentions&quot;:[],&quot;message&quot;:&quot;A new trade has been created with the following data:\nSell Currency: {![Trade__c].Sell_Currency__c}\nSell Amount: {![Trade__c].Sell_Amount__c}\nBuy Currency: {![Trade__c].Buy_Currency__c}\nBuy Amount:{![Trade__c].Buy_Amount__c}\nRate: {![Trade__c].Rate__c}\nBooked Date: {![Trade__c].CreatedDate}\nLinked to trade: https://ability-velocity-954-dev-ed.lightning.force.com//{![Trade__c].Id}&quot;}</stringValue>
             </value>
         </processMetadataValues>
         <name>myRule_1_A1</name>
@@ -32,7 +32,7 @@ Buy Currency: {!myVariable_current.Buy_Currency__c}
 Buy Amount:{!myVariable_current.Buy_Amount__c}
 Rate: {!myVariable_current.Rate__c}
 Booked Date: {!myVariable_current.CreatedDate}
-Linked to trade: https://force-customer-6015-dev-ed.lightning.force.com/{!myVariable_current.Id}</stringValue>
+Linked to trade: https://ability-velocity-954-dev-ed.lightning.force.com/{!myVariable_current.Id}</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -44,7 +44,7 @@ Linked to trade: https://force-customer-6015-dev-ed.lightning.force.com/{!myVari
         <inputParameters>
             <name>subjectNameOrId</name>
             <value>
-                <stringValue>0F95r000000CmyLCAS</stringValue>
+                <stringValue>0F99E0000009nk7SAA</stringValue>
             </value>
         </inputParameters>
     </actionCalls>
@@ -82,7 +82,7 @@ Linked to trade: https://force-customer-6015-dev-ed.lightning.force.com/{!myVari
         <dataType>Boolean</dataType>
         <expression>true</expression>
     </formulas>
-    <interviewLabel>Trade_Created-3_InterviewLabel</interviewLabel>
+    <interviewLabel>Trade_Created-2_InterviewLabel</interviewLabel>
     <label>Trade Created</label>
     <processMetadataValues>
         <name>ObjectType</name>

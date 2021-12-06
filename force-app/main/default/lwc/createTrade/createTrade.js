@@ -33,7 +33,11 @@ export default class CreateTrade extends LightningElement {
 
   handleInputChange(event) {
     console.log(event.target.fieldName);
-    console.log(event.target);
+
+    this.initCallout[event.target.fieldName] = event.target.value;
+    if (event.target.fieldName === "Sell_Amount__c") {
+      this.sellAmountVal = event.target.value;
+    }
 
     // Debouncing this method: Do not actually fire the event as long as this function is
     // being called within a delay of DELAY. This is to avoid a very large number of Apex
@@ -41,11 +45,6 @@ export default class CreateTrade extends LightningElement {
     window.clearTimeout(this.delayTimeout);
     // eslint-disable-next-line @lwc/lwc/no-async-operation
     this.delayTimeout = setTimeout(() => {
-      this.initCallout[event.target.fieldName] = event.target.value;
-      if (event.target.fieldName === "Sell_Amount__c") {
-        this.sellAmountVal = event.target.value;
-      }
-
       this.fetchRate();
     }, DELAY);
   }
@@ -56,6 +55,7 @@ export default class CreateTrade extends LightningElement {
       this.initCallout.Sell_Amount__c &&
       this.initCallout.Buy_Currency__c
     ) {
+      console.log("FIRE CALLOUT");
       doRateCallout({
         isMock: true,
         baseCurrency: this.initCallout.Sell_Currency__c,
@@ -71,8 +71,12 @@ export default class CreateTrade extends LightningElement {
     }
   }
 
-  handleTradeCreated(event) {
-    console.log("handleTradeCreated", event.detail.id);
+  handleTradeCreated() {
+    console.log("Trade Cerated");
+    // eslint-disable-next-line @lwc/lwc/no-async-operation
+    setTimeout(() => {
+      this.dispatchEvent(new CustomEvent("tradecreated"));
+    }, 1000);
   }
 
   handleReset() {
@@ -85,5 +89,7 @@ export default class CreateTrade extends LightningElement {
     this.rateVal = undefined;
     this.sellAmountVal = undefined;
     this.initCallout = undefined;
+
+    this.dispatchEvent(new CustomEvent("closemodal"));
   }
 }

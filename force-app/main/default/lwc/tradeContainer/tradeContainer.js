@@ -25,15 +25,20 @@ export default class TradeContainer extends LightningElement {
     // to open modal set isModalOpen tarck value as true
     this.isModalOpen = true;
   }
-  closeModal() {
-    // to close modal set isModalOpen tarck value as false
-    this.isModalOpen = false;
-  }
 
   handleClick(event) {
     console.log(event.target);
     console.log(this.defaultRecordTypeId);
     console.log(this.objectInfo.recordTypeInfos);
     console.log(this.objectInfo.themeInfo.iconUrl);
+  }
+  tradeCreated() {
+    console.log("Catch the event tradeCreated");
+    this.template.querySelector("c-list-trades").fetchRecords();
+  }
+
+  closeModal() {
+    console.log("Close MOdal subsriber container");
+    this.isModalOpen = false;
   }
 }

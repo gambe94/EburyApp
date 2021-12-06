@@ -23,13 +23,13 @@
 
   <!--Use template if:true to display/hide popup based on isModalOpen value-->
   <template if:true={isModalOpen}>
-    <c-modal-view>
+    <c-modal-view onclosemodal={closeModal}>
       <span slot="modalHeader">Create Trade</span>
-      <c-create-trade slot="modalBody"></c-create-trade>
-      <div slot="buttons">
-        <lightning-button label="Cancel"></lightning-button>
-        <lightning-button label="Create from Container"></lightning-button>
-      </div>
+      <c-create-trade
+        onclosemodal={closeModal}
+        slot="modalBody"
+        ontradecreated={tradeCreated}
+      ></c-create-trade>
     </c-modal-view>
   </template>
 </template>
