@@ -13,6 +13,8 @@ public with sharing class TradesController {
         CreatedDate
       FROM Trade__c
       WITH SECURITY_ENFORCED
+      ORDER BY CreatedDate DESC
+      LIMIT 100
     ];
   }
 

@@ -43,4 +43,25 @@ public with sharing class RateCalloutServiceTest {
       'RateCalloutWrapperException not occured'
     );
   }
+  @IsTest
+  private static void testRateCalloutestrictedAccess() {
+    HttpCalloutMock restrictedMock = RateCalloutMockFactory.getMock(105);
+
+    Test.setMock(HttpCalloutMock.class, restrictedMock);
+    RateCalloutWrapper.Rate actualRate;
+    Boolean isExceptionOccured = false;
+    Test.startTest();
+    try {
+      RateCalloutService calloutService = new RateCalloutService('EUR', 'HUF');
+      actualRate = calloutService.doCallout();
+    } catch (RateCalloutWrapper.RateCalloutWrapperException e) {
+      isExceptionOccured = true;
+      System.debug(e.customError);
+    }
+    Test.stopTest();
+    System.assert(
+      isExceptionOccured,
+      'RateCalloutWrapperException not occured'
+    );
+  }
 }
