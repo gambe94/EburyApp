@@ -1,6 +1,7 @@
-import { api, LightningElement } from "lwc";
+import { api, LightningElement, wire } from "lwc";
 import getAllTrade from "@salesforce/apex/TradesController.getAllTrade";
 
+import { refreshApex } from "@salesforce/apex";
 const columns = [
   { label: "Id", fieldName: "Name" },
   { label: "Sell CCY", fieldName: "Sell_Currency__c" },
@@ -12,24 +13,15 @@ const columns = [
 ];
 
 export default class ListTrades extends LightningElement {
-  data = [];
-  error;
   columns = columns;
 
-  connectedCallback() {
-    this.fetchRecords();
-  }
+  @wire(getAllTrade)
+  trades;
 
   @api
-  fetchRecords() {
-    getAllTrade()
-      .then((data) => {
-        this.data = data;
-        console.log("Gabor fecthing the records", data);
-      })
-      .catch((error) => {
-        this.error = error;
-        console.error(error);
-      });
+  refreshTable() {
+    return refreshApex(this.trades)
+      .then((result) => console.log(result))
+      .catch((error) => console.error(error));
   }
 }

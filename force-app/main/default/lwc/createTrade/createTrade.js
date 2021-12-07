@@ -86,6 +86,12 @@ export default class CreateTrade extends LightningElement {
     let tradeId = event.detail.id;
     this.generateSuccessToast(tradeId);
     this.dispatchEvent(new CustomEvent("tradecreated"));
+    this.closeModal();
+  }
+
+  handleCancel() {
+    this.resetFields();
+    this.closeModal();
   }
 
   generateSuccessToast(tradeId) {
@@ -105,7 +111,7 @@ export default class CreateTrade extends LightningElement {
     this.dispatchEvent(event);
   }
 
-  handleCancel() {
+  resetFields() {
     const inputFields = this.template.querySelectorAll("lightning-input-field");
     if (inputFields) {
       inputFields.forEach((field) => {
@@ -115,7 +121,8 @@ export default class CreateTrade extends LightningElement {
     this.rateVal = undefined;
     this.sellAmountVal = undefined;
     this.initCallout = undefined;
-
+  }
+  closeModal() {
     this.dispatchEvent(new CustomEvent("closemodal"));
   }
 }

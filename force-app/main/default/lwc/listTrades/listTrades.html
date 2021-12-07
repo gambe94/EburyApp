@@ -1,11 +1,17 @@
 <!-- sldsValidatorIgnore -->
 <template>
-  <lightning-datatable
-    key-field="id"
-    data={data}
-    show-row-number-column
-    hide-checkbox-column
-    columns={columns}
-  >
-  </lightning-datatable>
+  <template if:true={trades.data}>
+    <lightning-datatable
+      key-field="id"
+      data={trades.data}
+      show-row-number-column
+      hide-checkbox-column
+      columns={columns}
+    >
+    </lightning-datatable>
+  </template>
+
+  <template if:false={trades.data}>
+    <h2>Dont have any trade records in your org.</h2>
+  </template>
 </template>
