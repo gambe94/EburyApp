@@ -85,7 +85,6 @@ export default class CreateTrade extends LightningElement {
   handleTradeCreated(event) {
     let tradeId = event.detail.id;
     this.generateSuccessToast(tradeId);
-
     this.dispatchEvent(new CustomEvent("tradecreated"));
   }
 
@@ -106,7 +105,7 @@ export default class CreateTrade extends LightningElement {
     this.dispatchEvent(event);
   }
 
-  handleReset() {
+  handleCancel() {
     const inputFields = this.template.querySelectorAll("lightning-input-field");
     if (inputFields) {
       inputFields.forEach((field) => {

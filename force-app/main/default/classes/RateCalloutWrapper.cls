@@ -15,9 +15,6 @@ public with sharing class RateCalloutWrapper {
   @AuraEnabled
   public Error error { get; set; }
 
-  public RateCalloutWrapper() {
-  }
-
   public class Rate {
     @AuraEnabled
     public Double HUF;

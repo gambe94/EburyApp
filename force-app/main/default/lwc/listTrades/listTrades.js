@@ -1,5 +1,4 @@
-import { api, LightningElement, track } from "lwc";
-
+import { api, LightningElement } from "lwc";
 import getAllTrade from "@salesforce/apex/TradesController.getAllTrade";
 
 const columns = [
@@ -13,7 +12,6 @@ const columns = [
 ];
 
 export default class ListTrades extends LightningElement {
-  @track
   data = [];
   error;
   columns = columns;
@@ -24,7 +22,6 @@ export default class ListTrades extends LightningElement {
 
   @api
   fetchRecords() {
-    console.log("Gabor fecthing the records");
     getAllTrade()
       .then((data) => {
         this.data = data;

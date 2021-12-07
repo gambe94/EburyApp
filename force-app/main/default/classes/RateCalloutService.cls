@@ -49,8 +49,6 @@ public with sharing class RateCalloutService {
   ) {
     try {
       if (rateWrapper.success) {
-        System.debug('GOOD');
-        System.debug(rateWrapper.rates);
         return rateWrapper.rates;
       } else {
         throw new RateCalloutWrapper.RateCalloutWrapperException(
