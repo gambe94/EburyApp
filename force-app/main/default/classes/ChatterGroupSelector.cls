@@ -1,5 +1,6 @@
 public with sharing class ChatterGroupSelector {
-  private static String TRADE_REVIEWS_GROUP = 'Trade reviewers';
+  private static final String TRADE_REVIEWS_GROUP = 'Trade reviewers';
+
   @TestVisible
   private static String TEST_GROUP_NAME;
 

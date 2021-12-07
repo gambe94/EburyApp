@@ -2,32 +2,20 @@
 public with sharing class TradeControllerTest {
   @IsTest
   private static void testGetAllTrade() {
-    String GROUP_NAME = 'GABOR GROUP work';
-    ChatterGroupSelector.TEST_GROUP_NAME = GROUP_NAME;
+    Id groupId = TestFactory.createFakeChatterGroup();
+    Integer recordNumber = 50;
+    List<Trade__c> trades = TestFactory.createTrades(recordNumber);
 
-    CollaborationGroup myGroup = new CollaborationGroup();
-    myGroup.Name = GROUP_NAME;
-    myGroup.CollaborationType = 'Public';
-    insert myGroup;
-
-    List<Trade__c> trades = new List<Trade__c>();
-    for (Integer i = 0; i < 10; i++) {
-      trades.add(
-        new Trade__c(
-          Buy_Amount__c = 200,
-          Buy_Currency__c = 'HUF',
-          Sell_Amount__c = 300,
-          Sell_Currency__c = 'EUR',
-          Rate__c = 1.145
-        )
-      );
-    }
     insert trades;
     List<Trade__c> result;
     Test.startTest();
     result = TradesController.getAllTrade();
     Test.stopTest();
-    System.assertEquals(10, result.size(), 'Not 10 Trade record was retreived');
+    System.assertEquals(
+      recordNumber,
+      result.size(),
+      'Not 10 Trade record was retreived'
+    );
   }
 
   @IsTest

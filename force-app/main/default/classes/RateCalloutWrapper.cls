@@ -1,13 +1,4 @@
 public with sharing class RateCalloutWrapper {
-  public class RateCalloutWrapperException extends Exception {
-    @AuraEnabled
-    public RateCalloutWrapper.Error customError;
-    public RateCalloutWrapperException(RateCalloutWrapper.Error error) {
-      this.customError = error;
-      this.setMessage(String.isNotBlank(error.info) ? error.info : error.type);
-    }
-  }
-
   public Boolean success { get; set; }
   public String base { get; set; }
   @AuraEnabled
@@ -15,6 +6,7 @@ public with sharing class RateCalloutWrapper {
   @AuraEnabled
   public Error error { get; set; }
 
+  /**Just parsa the allowed currencies */
   public class Rate {
     @AuraEnabled
     public Double HUF;
@@ -39,5 +31,14 @@ public with sharing class RateCalloutWrapper {
     public String type { get; set; }
     @AuraEnabled
     public String info { get; set; }
+  }
+
+  public class RateCalloutWrapperException extends Exception {
+    @AuraEnabled
+    public RateCalloutWrapper.Error customError;
+    public RateCalloutWrapperException(RateCalloutWrapper.Error error) {
+      this.customError = error;
+      this.setMessage(String.isNotBlank(error.info) ? error.info : error.type);
+    }
   }
 }
