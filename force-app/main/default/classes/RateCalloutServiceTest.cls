@@ -1,5 +1,5 @@
 @IsTest
-global with sharing class RateCalloutServiceTest {
+public with sharing class RateCalloutServiceTest {
   @IsTest
   private static void testRateCalloutSuccessfull() {
     HttpCalloutMock mySuccessMock = RateCalloutMockFactory.getMock(200);
@@ -10,8 +10,16 @@ global with sharing class RateCalloutServiceTest {
     RateCalloutService calloutService = new RateCalloutService('EUR', 'HUF');
     actualRate = calloutService.doCallout();
     Test.stopTest();
-    System.assertEquals(365, actualRate.HUF);
-    System.assertEquals(1.560132, actualRate.CAD);
+    System.assertEquals(
+      365,
+      actualRate.HUF,
+      'Actual rate not same as defined in the mock'
+    );
+    System.assertEquals(
+      1.560132,
+      actualRate.CAD,
+      'Actual rate not same as defined in the mock'
+    );
   }
 
   @IsTest
