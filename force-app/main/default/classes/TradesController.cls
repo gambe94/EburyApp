@@ -16,6 +16,14 @@ public with sharing class TradesController {
     ];
   }
 
+  /**
+   * @description
+   * Do a Callout to Flexi api to Fetch the actual currency rate
+   * @param baseCurrency
+   * @param targetCurrency
+   * @return
+   * @example
+   */
   @AuraEnabled
   public static RateCalloutWrapper.Rate getRate(
     String baseCurrency,

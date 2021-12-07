@@ -5,8 +5,6 @@
     <masterLabel>Trade App Containser</masterLabel>
     <description>Use as a container component for Trading App</description>
     <targets>
-        <target>lightning__RecordPage</target>
-        <target>lightning__AppPage</target>
-        <target>lightning__HomePage</target>
+        <target>lightning__AppPage</target>      
     </targets>
 </LightningComponentBundle>
