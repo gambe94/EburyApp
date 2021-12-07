@@ -1,7 +1,7 @@
 import { api, LightningElement, wire } from "lwc";
 import getAllTrade from "@salesforce/apex/TradesController.getAllTrade";
-
 import { refreshApex } from "@salesforce/apex";
+
 const columns = [
   { label: "Id", fieldName: "Name" },
   { label: "Sell CCY", fieldName: "Sell_Currency__c" },

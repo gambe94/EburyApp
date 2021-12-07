@@ -28,6 +28,8 @@ public with sharing class RateCalloutWrapper {
     public Double GBP;
     @AuraEnabled
     public Double CAD;
+    @AuraEnabled
+    public Double KRW;
   }
 
   public class Error {

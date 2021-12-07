@@ -8,15 +8,17 @@
       ></lightning-icon>
       Trades
     </h3>
-    <div class="slds-var-p-horizontal_medium body">
-      <c-list-trades icon-name={iconName}> </c-list-trades>
-    </div>
-    <div slot="footer">
+    <div slot="actions">
       <lightning-button
         label="Create Trade"
         onclick={createTrade}
+        variant="brand"
       ></lightning-button>
     </div>
+    <div class="slds-var-p-horizontal_medium body">
+      <c-list-trades icon-name={iconName}> </c-list-trades>
+    </div>
+    <div slot="footer"></div>
   </lightning-card>
 
   <!--Use template if:true to display/hide popup based on isModalOpen value-->

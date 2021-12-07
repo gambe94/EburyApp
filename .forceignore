@@ -13,6 +13,8 @@ package.xml
 
 
 #Profiles
-**profiles
+# **profiles
 
 
+#Flows
+force-app\main\default\flows\Trade_Created.flow-meta.xml

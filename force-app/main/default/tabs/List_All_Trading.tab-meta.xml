@@ -2,6 +2,6 @@
 <CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
     <description>Created by Lightning App Builder</description>
     <flexiPage>List_All_Trading</flexiPage>
-    <label>List All Trading</label>
+    <label>All Trading</label>
     <motif>Custom40: Credit card</motif>
 </CustomTab>

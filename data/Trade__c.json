@@ -1,0 +1,103 @@
+{
+  "records": [
+    {
+      "attributes": {
+        "type": "Trade__c",
+        "referenceId": "Trade__cRef1"
+      },
+      "Buy_Amount__c": 52.92282,
+      "Buy_Currency__c": "GBP",
+      "Sell_Amount__c": 60,
+      "Sell_Currency__c": "EUR",
+      "Rate__c": 0.882047
+    },
+    {
+      "attributes": {
+        "type": "Trade__c",
+        "referenceId": "Trade__cRef2"
+      },
+      "Buy_Amount__c": 6681.506025000001,
+      "Buy_Currency__c": "GBP",
+      "Sell_Amount__c": 7575,
+      "Sell_Currency__c": "EUR",
+      "Rate__c": 0.882047
+    },
+    {
+      "attributes": {
+        "type": "Trade__c",
+        "referenceId": "Trade__cRef3"
+      },
+      "Buy_Amount__c": 68.799666,
+      "Buy_Currency__c": "GBP",
+      "Sell_Amount__c": 78,
+      "Sell_Currency__c": "EUR",
+      "Rate__c": 0.882047
+    },
+    {
+      "attributes": {
+        "type": "Trade__c",
+        "referenceId": "Trade__cRef4"
+      },
+      "Buy_Amount__c": 20.287081,
+      "Buy_Currency__c": "GBP",
+      "Sell_Amount__c": 23,
+      "Sell_Currency__c": "EUR",
+      "Rate__c": 0.882047
+    },
+    {
+      "attributes": {
+        "type": "Trade__c",
+        "referenceId": "Trade__cRef5"
+      },
+      "Buy_Amount__c": 10780.378434,
+      "Buy_Currency__c": "GBP",
+      "Sell_Amount__c": 12222,
+      "Sell_Currency__c": "EUR",
+      "Rate__c": 0.882047
+    },
+    {
+      "attributes": {
+        "type": "Trade__c",
+        "referenceId": "Trade__cRef6"
+      },
+      "Buy_Amount__c": 52.92282,
+      "Buy_Currency__c": "GBP",
+      "Sell_Amount__c": 60,
+      "Sell_Currency__c": "EUR",
+      "Rate__c": 0.882047
+    },
+    {
+      "attributes": {
+        "type": "Trade__c",
+        "referenceId": "Trade__cRef7"
+      },
+      "Buy_Amount__c": 39692.115,
+      "Buy_Currency__c": "GBP",
+      "Sell_Amount__c": 45000,
+      "Sell_Currency__c": "EUR",
+      "Rate__c": 0.882047
+    },
+    {
+      "attributes": {
+        "type": "Trade__c",
+        "referenceId": "Trade__cRef8"
+      },
+      "Buy_Amount__c": 694.170989,
+      "Buy_Currency__c": "GBP",
+      "Sell_Amount__c": 787,
+      "Sell_Currency__c": "EUR",
+      "Rate__c": 0.882047
+    },
+    {
+      "attributes": {
+        "type": "Trade__c",
+        "referenceId": "Trade__cRef9"
+      },
+      "Buy_Amount__c": 691.524848,
+      "Buy_Currency__c": "GBP",
+      "Sell_Amount__c": 784,
+      "Sell_Currency__c": "EUR",
+      "Rate__c": 0.882047
+    }
+  ]
+}

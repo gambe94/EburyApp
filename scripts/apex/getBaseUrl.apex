@@ -1,10 +1,14 @@
-delete [ SELECT
-        Id,
-        Name,
-        Buy_Amount__c,
-        Buy_Currency__c,
-        Sell_Amount__c,
-        Sell_Currency__c,
-        Rate__c,
-        CreatedDate
-      FROM Trade__c LIMIT 15];
+CollaborationGroup myGroup = new CollaborationGroup();
+myGroup.Name = 'Trade reviewers';
+myGroup.CollaborationType = 'Public'; //can be 'Public' or 'Private'
+insert myGroup;
+
+CollaborationGroupMember groupMember = new CollaborationGroupMember();
+groupMember.memberid = [
+  SELECT Id
+  FROM User
+  WHERE username LIKE 'tester1@ebury%'
+]
+.Id;
+groupMember.CollaborationGroupId = myGroup.Id; //Id of group created above
+insert groupMember;

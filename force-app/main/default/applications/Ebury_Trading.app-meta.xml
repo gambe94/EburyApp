@@ -14,10 +14,6 @@
     <label>Ebury Trading</label>
     <navType>Standard</navType>
     <tabs>List_All_Trading</tabs>
-    <tabs>standard-home</tabs>
     <tabs>standard-Feed</tabs>
-    <tabs>standard-Event</tabs>
-    <tabs>standard-report</tabs>
-    <tabs>Trade__c</tabs>
-    <uiType>Lightning</uiType>   
+    <uiType>Lightning</uiType>
 </CustomApplication>

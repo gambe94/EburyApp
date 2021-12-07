@@ -32,7 +32,7 @@ Buy Currency: {!myVariable_current.Buy_Currency__c}
 Buy Amount:{!myVariable_current.Buy_Amount__c}
 Rate: {!myVariable_current.Rate__c}
 Booked Date: {!myVariable_current.CreatedDate}
-Linked to trade: https://ability-velocity-954-dev-ed.lightning.force.com/{!myVariable_current.Id}</stringValue>
+Linked to trade: https://agility-momentum-9845-dev-ed.cs84.my.salesforce.com/{!myVariable_current.Id}</stringValue>
             </value>
         </inputParameters>
         <inputParameters>
@@ -44,7 +44,7 @@ Linked to trade: https://ability-velocity-954-dev-ed.lightning.force.com/{!myVar
         <inputParameters>
             <name>subjectNameOrId</name>
             <value>
-                <stringValue>0F99E0000009nk7SAA</stringValue>
+                <stringValue>0F95E0000002LRYSA2</stringValue>
             </value>
         </inputParameters>
     </actionCalls>

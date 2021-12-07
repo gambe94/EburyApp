@@ -25,9 +25,9 @@ public with sharing class RateCalloutService {
     System.debug(req.getEndpoint());
 
     Http http = new Http();
-    //HttpResponse response = http.send(req);
-    // return parse(response.getBody());
-    return parse(RateCalloutMockFactory.getMock(200).respond(null).getBody());
+    HttpResponse response = http.send(req);
+    return parse(response.getBody());
+    //return parse(RateCalloutMockFactory.getMock(200).respond(null).getBody());
   }
 
   public RateCalloutWrapper.Rate parse(String responseBody) {
