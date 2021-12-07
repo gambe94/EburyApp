@@ -1,22 +1,17 @@
 @IsTest
 public with sharing class PostToChatterServiceTest {
-  @TestSetup
-  static void testSetup() {
-    ChatterGroupSelector.TRADE_REVIEWS_GROUP = 'Not exist group';
+  @IsTest
+  private static void testPostToChatterGroup() {
+    String GROUP_NAME = 'GABOR GROUP work';
+    ChatterGroupSelector.TEST_GROUP_NAME = GROUP_NAME;
 
     CollaborationGroup myGroup = new CollaborationGroup();
-    myGroup.Name = ChatterGroupSelector.TRADE_REVIEWS_GROUP;
+    myGroup.Name = GROUP_NAME;
     myGroup.CollaborationType = 'Public';
     insert myGroup;
 
-    Id groupId = ChatterGroupSelector.getTradeReviewersGroup();
-    System.debug(groupId);
-  }
-
-  @IsTest
-  private static void testPostToChatterGroup() {
     List<Trade__c> trades = new List<Trade__c>();
-    for (Integer i = 0; i < 1; i++) {
+    for (Integer i = 0; i < 10; i++) {
       trades.add(
         new Trade__c(
           Buy_Amount__c = 200,
@@ -27,18 +22,15 @@ public with sharing class PostToChatterServiceTest {
         )
       );
     }
-    insert trades;
 
-    Id groupId = ChatterGroupSelector.getTradeReviewersGroup();
-    System.debug(groupId);
     Test.startTest();
-    PostToChatterService.postToChatterGroup(groupId, trades);
+    insert trades;
     Test.stopTest();
     List<FeedItem> items = [SELECT id FROM FeedItem];
-    // System.assertEquals(
-    //   10,
-    //   items.size(),
-    //   'FeedItem not created for every trade'
-    // );
+    System.assertEquals(
+      10,
+      items.size(),
+      'FeedItem not created for every trade'
+    );
   }
 }

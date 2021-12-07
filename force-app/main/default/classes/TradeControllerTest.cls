@@ -2,6 +2,14 @@
 public with sharing class TradeControllerTest {
   @IsTest
   private static void testGetAllTrade() {
+    String GROUP_NAME = 'GABOR GROUP work';
+    ChatterGroupSelector.TEST_GROUP_NAME = GROUP_NAME;
+
+    CollaborationGroup myGroup = new CollaborationGroup();
+    myGroup.Name = GROUP_NAME;
+    myGroup.CollaborationType = 'Public';
+    insert myGroup;
+
     List<Trade__c> trades = new List<Trade__c>();
     for (Integer i = 0; i < 10; i++) {
       trades.add(

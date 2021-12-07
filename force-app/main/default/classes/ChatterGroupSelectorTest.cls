@@ -2,10 +2,11 @@
 public with sharing class ChatterGroupSelectorTest {
   @Istest
   private static void testGetTradeReviewersGroup() {
-    ChatterGroupSelector.TRADE_REVIEWS_GROUP = 'Not exist group';
+    String GROUP_NAME = 'GABOR GROUP work';
+    ChatterGroupSelector.TEST_GROUP_NAME = GROUP_NAME;
 
     CollaborationGroup myGroup = new CollaborationGroup();
-    myGroup.Name = ChatterGroupSelector.TRADE_REVIEWS_GROUP;
+    myGroup.Name = GROUP_NAME;
     myGroup.CollaborationType = 'Public';
     insert myGroup;
 
