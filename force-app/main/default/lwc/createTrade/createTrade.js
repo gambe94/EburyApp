@@ -23,12 +23,13 @@ export default class CreateTrade extends LightningElement {
   rate = RATE;
   rateVal;
   sellAmountVal;
+  isIntegrationError = false;
 
   get calculatedBuyAmount() {
     return this.rateVal * this.sellAmountVal;
   }
   get isCreateTradeDisabled() {
-    return !this.rateVal;
+    return !this.rateVal && !this.isIntegrationError;
   }
 
   initCallout = {};
@@ -63,13 +64,13 @@ export default class CreateTrade extends LightningElement {
         targetCurrency: this.initCallout.Buy_Currency__c
       })
         .then((rates) => {
-          console.log(rates);
-          console.log(this.sellAmountVal);
+          this.isIntegrationError = false;
           this.rateVal = rates[this.initCallout.Buy_Currency__c]; //data?.rates?.this.initCallout.Buy_Currency__c;
         })
         .catch((e) => {
           console.error(e);
           console.error("e.body.message => " + e.body.message);
+          this.isIntegrationError = true;
 
           const event = new ShowToastEvent({
             title: "Integration error",
@@ -95,7 +96,6 @@ export default class CreateTrade extends LightningElement {
   }
 
   generateSuccessToast(tradeId) {
-    console.log(tradeId);
     const event = new ShowToastEvent({
       title: "Success!",
       variant: "success",

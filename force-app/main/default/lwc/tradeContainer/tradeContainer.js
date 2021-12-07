@@ -15,7 +15,6 @@ export default class TradeContainer extends LightningElement {
   }
 
   tradeCreated() {
-    console.log("Catch the event tradeCreated");
     this.template.querySelector("c-list-trades").refreshTable();
   }
 

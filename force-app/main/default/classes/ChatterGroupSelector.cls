@@ -6,7 +6,6 @@ public with sharing class ChatterGroupSelector {
 
   private static Id tradeReviewersGroup = null;
   public static Id getTradeReviewersGroup() {
-    System.debug(TEST_GROUP_NAME);
     if (tradeReviewersGroup == null) {
       String gropuName = Test.isRunningTest()
         ? TEST_GROUP_NAME

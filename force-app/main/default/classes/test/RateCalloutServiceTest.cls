@@ -35,7 +35,6 @@ public with sharing class RateCalloutServiceTest {
       actualRate = calloutService.doCallout();
     } catch (RateCalloutWrapper.RateCalloutWrapperException e) {
       isExceptionOccured = true;
-      System.debug(e.customError);
     }
     Test.stopTest();
     System.assert(

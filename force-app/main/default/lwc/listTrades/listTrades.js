@@ -20,8 +20,6 @@ export default class ListTrades extends LightningElement {
 
   @api
   refreshTable() {
-    return refreshApex(this.trades)
-      .then((result) => console.log(result))
-      .catch((error) => console.error(error));
+    return refreshApex(this.trades).catch((error) => console.error(error));
   }
 }

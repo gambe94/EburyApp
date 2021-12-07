@@ -22,8 +22,6 @@ public with sharing class RateCalloutService {
     req.setEndpoint('callout:Fixer_Api' + fullPath);
     req.setMethod('GET');
 
-    System.debug(req.getEndpoint());
-
     Http http = new Http();
     HttpResponse response = http.send(req);
     return parse(response.getBody());

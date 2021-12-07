@@ -11,8 +11,6 @@ public with sharing class PostToChatterService {
         )
       );
     }
-    System.debug('Gabor check postToChatterGroup');
-    System.debug(JSON.serialize(feedItems));
     insert feedItems;
   }
 
