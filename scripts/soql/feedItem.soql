@@ -1,0 +1,4 @@
+SELECT BestCommentId, Body, CommentCount, CreatedById, CreatedDate, HasContent, HasFeedEntity, HasLink, HasVerifiedComment, Id, InsertedById, IsClosed, IsDeleted, IsRichText, LastEditById, LastEditDate, LastModifiedDate, LikeCount, LinkUrl, ParentId, RelatedRecordId, Revision, Status, SystemModstamp, Title, Type
+  FROM FeedItem
+  WHERE CreatedDate > LAST_MONTH
+  ORDER BY CreatedDate DESC

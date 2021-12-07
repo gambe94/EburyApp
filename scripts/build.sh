@@ -13,7 +13,7 @@ sfdx force:data:tree:import -f data/Integration_Configs__c.json
 #Import test trade records
 sfdx force:data:tree:import -f data/Trade__c.json
 
-#Create chatterGroup and add member
+Create chatterGroup and add member
 sfdx force:apex:execute -f ./scripts/apex/createChatterGroup.apex 
 
 #Create test User
