@@ -110,7 +110,7 @@ Linked to trade: https://agility-momentum-9845-dev-ed.cs84.my.salesforce.com/{!m
     </processMetadataValues>
     <processType>Workflow</processType>
     <startElementReference>myDecision</startElementReference>
-    <status>Active</status>
+    <status>Obsolete</status>
     <variables>
         <name>myVariable_current</name>
         <dataType>SObject</dataType>
