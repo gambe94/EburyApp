@@ -6,7 +6,7 @@ public with sharing class RateCalloutWrapper {
   @AuraEnabled
   public Error error { get; set; }
 
-  /**Just parsa the allowed currencies */
+  /**Just parse the allowed currencies */
   public class Rate {
     @AuraEnabled
     public Double HUF;
