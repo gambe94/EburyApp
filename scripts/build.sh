@@ -1,23 +1,24 @@
-sfdx force:org:create -f config/project-scratch-def.json -a Dev --setdefaultusername
+#Create sratchOrg
+sfdx force:org:create -f config/project-scratch-def.json -a QAEbury --setdefaultusername
 
-sfdx force:source:push -u Dev
+sfdx force:source:push
 
 #To give access to our system admin user
 sfdx force:user:permset:assign --permsetname Ebury_Trading
 
-# sfdx force:data:tree:export -q "SELECT Fixer_Api_Key__c FROM Integration_Configs__c" -d ./data
-#sfdx force:data:tree:export -q "SELECT  Id,  Name, Buy_Amount__c, Buy_Currency__c, Sell_Amount__c, Sell_Currency__c, Rate__c  FROM Trade__c" -d ./data
-
-#Import config records
-sfdx force:data:tree:import -f data/Integration_Configs__c.json
 #Import test trade records
 sfdx force:data:tree:import -f data/Trade__c.json
 
-Create chatterGroup and add member
-sfdx force:apex:execute -f ./scripts/apex/createChatterGroup.apex 
+#Add queue members
+sfdx force:apex:execute -f ./scripts/apex/addQueueMember.apex 
+
+#Init customsetting
+sfdx force:apex:execute -f ./scripts/apex/initCustomSetting.apex 
 
 #Create test User
 sfdx force:user:create --setalias qa-user --definitionfile config/qa-userDef.json 
+
+#Display Login info for testing user
 sfdx force:user:display -u qa-user
 
 
