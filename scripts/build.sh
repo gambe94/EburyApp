@@ -1,5 +1,5 @@
 #Create sratchOrg
-sfdx force:org:create -f config/project-scratch-def.json -a QAEbury --setdefaultusername
+#sfdx force:org:create -f config/project-scratch-def.json -a QAEbury --setdefaultusername
 
 sfdx force:source:push
 

@@ -20,4 +20,4 @@ GroupMember myUser = new GroupMember(
 
 members.add(myUser);
 
-Database.insert(members, false)
+Database.insert(members, false);
