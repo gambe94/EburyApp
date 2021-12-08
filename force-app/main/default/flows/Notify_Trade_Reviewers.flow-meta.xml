@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Notify_Trade_Reviewers</name>
+        <label>Notify Trade Reviewers</label>
+        <locationX>264</locationX>
+        <locationY>695</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <connector>
+            <targetReference>Queue_Member_Loop</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>TradeReviewBodyTemplate</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference
+        >Queue_Member_Loop.UserOrGroupId</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>type</name>
+            <value>
+                <elementReference>PostToChatterType</elementReference>
+            </value>
+        </inputParameters>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>53.0</apiVersion>
+    <constants>
+        <name>PostToChatterType</name>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>User</stringValue>
+        </value>
+    </constants>
+    <interviewLabel>Notify Reviewers {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Notify Trade Reviewers</label>
+    <loops>
+        <name>Queue_Member_Loop</name>
+        <label>Queue Member Loop</label>
+        <locationX>176</locationX>
+        <locationY>575</locationY>
+        <collectionReference>Get_Trade_Review_Queue_Member</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Notify_Trade_Reviewers</targetReference>
+        </nextValueConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_Trade_Review_Queue_Member</name>
+        <label>Get Trade Review Queue Member</label>
+        <locationX>176</locationX>
+        <locationY>455</locationY>
+        <assignNullValuesIfNoRecordsFound
+    >false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Queue_Member_Loop</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>GroupId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Get_Trade_Reviewer_Queue.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>GroupMember</object>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>UserOrGroupId</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Trade_Reviewer_Queue</name>
+        <label>Get Trade Reviewer Queue</label>
+        <locationX>176</locationX>
+        <locationY>335</locationY>
+        <assignNullValuesIfNoRecordsFound
+    >false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Trade_Review_Queue_Member</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>QeuesName</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Group</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Trade_Reviewer_Queue</targetReference>
+        </connector>
+        <object>Trade__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>TradeReviewBodyTemplate</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>A new trade has been created with the following data:
+Sell Currency: {!$Record.Sell_Currency__c}
+Sell Amount: {!$Record.Sell_Amount__c}
+Buy Currency: {!$Record.Buy_Currency__c}
+Buy Amount: {!$Record.Buy_Amount__c}
+Rate: {!$Record.Rate__c}
+Booked Date: {!$Record.CreatedDate}
+Link to trade: {!$Setup.Integration_Configs__c.Org_domain__c}/{!$Record.Id}</text>
+    </textTemplates>
+    <variables>
+        <name>QeuesName</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>Trade_reviewers</stringValue>
+        </value>
+    </variables>
+</Flow>

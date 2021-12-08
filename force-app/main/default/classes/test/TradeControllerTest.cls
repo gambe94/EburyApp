@@ -2,7 +2,6 @@
 public with sharing class TradeControllerTest {
   @IsTest
   private static void testGetAllTrade() {
-    Id groupId = TestFactory.createFakeChatterGroup();
     Integer recordNumber = 50;
     List<Trade__c> trades = TestFactory.createTrades(recordNumber);
 

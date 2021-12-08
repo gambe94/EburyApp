@@ -29,19 +29,16 @@ export default class CreateTrade extends LightningElement {
     return this.rateVal * this.sellAmountVal;
   }
   get isCreateTradeDisabled() {
-    return !this.rateVal && !this.isIntegrationError;
+    return !this.rateVal || this.isIntegrationError;
   }
 
   initCallout = {};
 
   handleInputChange(event) {
-    console.log(event.target.fieldName);
-
     this.initCallout[event.target.fieldName] = event.target.value;
     if (event.target.fieldName === "Sell_Amount__c") {
       this.sellAmountVal = event.target.value;
     }
-
     // Debouncing this method: Do not actually fire the event as long as this function is
     // being called within a delay of DELAY. This is to avoid a very large number of Apex
     // method calls in components listening to this event.
@@ -53,11 +50,7 @@ export default class CreateTrade extends LightningElement {
   }
 
   fetchRate() {
-    if (
-      this.initCallout.Sell_Currency__c &&
-      this.initCallout.Sell_Amount__c &&
-      this.initCallout.Buy_Currency__c
-    ) {
+    if (this.initCallout.Sell_Currency__c && this.initCallout.Buy_Currency__c) {
       console.log("FIRE CALLOUT");
       doRateCallout({
         baseCurrency: this.initCallout.Sell_Currency__c,
@@ -65,10 +58,9 @@ export default class CreateTrade extends LightningElement {
       })
         .then((rates) => {
           this.isIntegrationError = false;
-          this.rateVal = rates[this.initCallout.Buy_Currency__c]; //data?.rates?.this.initCallout.Buy_Currency__c;
+          this.rateVal = rates[this.initCallout.Buy_Currency__c];
         })
         .catch((e) => {
-          console.error(e);
           console.error("e.body.message => " + e.body.message);
           this.isIntegrationError = true;
 
@@ -121,6 +113,7 @@ export default class CreateTrade extends LightningElement {
     this.rateVal = undefined;
     this.sellAmountVal = undefined;
     this.initCallout = undefined;
+    this.isIntegrationError = false;
   }
   closeModal() {
     this.dispatchEvent(new CustomEvent("closemodal"));
